@@ -6,11 +6,6 @@ __pycache__/
 .venv/
 venv/
 
-# Data
-data/raw/
-data/indexes/
-data/processed/
-
 # Models
 *.pkl
 *.joblib
@@ -55,16 +50,10 @@ __pycache__/
 venv/
 .venv/
 
-# Outputs
-outputs/
-
 # Models
 *.pkl
 *.parquet
 *.joblib
-
-# VS Code
-.vscode/
 
 data/raw/
 data/indexes/
