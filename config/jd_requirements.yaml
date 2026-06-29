@@ -1,0 +1,41 @@
+# Job Description requirements structure
+#
+# Target role: Senior AI Engineer (Founding Team) at Redrob AI.
+
+role:
+  title: "Senior AI Engineer"
+  min_experience_years: 5
+  max_experience_years: 9
+  experience_sweet_spot: [6, 8]     # Years of experience that get a premium score
+
+target_locations:
+  - "Pune"
+  - "Noida"
+  - "Delhi NCR"
+  - "Hyderabad"
+  - "Mumbai"
+
+disqualifiers:
+  services_companies:               # Exclude pure consulting/outsourcing firms
+    - "TCS"
+    - "Infosys"
+    - "Wipro"
+    - "Accenture"
+    - "Cognizant"
+    - "Capgemini"
+  academic_only: true               # Flag pure academic lab researchers with zero production deployments
+  langchain_only: true              # Flag recent projects utilizing only LangChain without pre-LLM ML/IR experience
+
+required_skills:
+  - "embeddings-based retrieval"
+  - "sentence-transformers"
+  - "vector database"
+  - "Pinecone"
+  - "Weaviate"
+  - "Qdrant"
+  - "Milvus"
+  - "OpenSearch"
+  - "Elasticsearch"
+  - "FAISS"
+  - "Python"
+  - "ranking systems evaluation"     # NDCG, MRR, MAP

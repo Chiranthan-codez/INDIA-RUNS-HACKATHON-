@@ -1,0 +1,29 @@
+# Settings Configuration File
+#
+# Scoring weights, thresholds, and paths. Modify these to tune the ranking model.
+
+scoring_weights:
+  title_match: 0.30
+  skill_alignment: 0.25
+  career_fit: 0.20
+  experience_band: 0.10
+  location: 0.10
+  education: 0.05
+
+behavioral_multiplier:
+  last_active_decay_days: 180      # Decay rate for inactivity
+  min_response_rate: 0.05          # Drop off score for poor responsive rate
+  open_to_work_bonus: 1.15         # Multiplier bonus for active seekers
+  notice_period_penalty_days: 90   # Threshold before penalty applies
+
+thresholds:
+  retrieval_top_k: 1000            # Candidates retained after coarse retrieval
+  final_top_n: 100                 # Target top count for submission
+  honeypot_confidence: 0.8         # Minimum confidence score to flag a honeypot
+
+paths:
+  raw_data: "data/raw/candidates.jsonl"
+  features: "data/processed/features.parquet"
+  honeypot_flags: "data/processed/honeypot_flags.json"
+  index: "data/indexes/tfidf_index.pkl"
+  output: "outputs/submission.csv"

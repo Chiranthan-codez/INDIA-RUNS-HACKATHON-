@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Data
+data/raw/
+data/indexes/
+data/processed/
+
+# Models
+*.pkl
+*.joblib
+*.pt
+*.bin
+
+# Outputs
+outputs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+data/raw/
+data/indexes/
+data/processed/
+
+# Python
+__pycache__/
+*.pyc
+
+# Models
+*.pkl
+*.parquet
+*.joblib
+
+# Data
+data/raw/
+data/indexes/
+data/processed/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+venv/
+.venv/
+
+# Outputs
+outputs/
+
+# Models
+*.pkl
+*.parquet
+*.joblib
+
+# VS Code
+.vscode/
+
+data/raw/
+data/indexes/
+data/processed/
+__pycache__/
+*.pyc
+*.pkl
+*.parquet
+outputs/
