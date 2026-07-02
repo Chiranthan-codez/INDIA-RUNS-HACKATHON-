@@ -70,12 +70,25 @@ def coarse_retrieval(tfidf_matrix, query_vec, candidate_ids, top_k: int = 2000):
     return [candidate_ids[i] for i in top_idx], sims[top_idx]
 
 
+import argparse
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="RecruitIQ Ranker")
+    parser.add_argument("--candidates", type=str, help="Path to candidates.jsonl file")
+    parser.add_argument("--out", type=str, help="Path to write submission.csv")
+    return parser.parse_known_args()
+
 def main():
     logger.info("=" * 60)
     logger.info("RecruitIQ Rank — Phase 2 (Scoring)")
     logger.info("=" * 60)
 
+    args, unknown = parse_args()
     settings = Settings.load_defaults(PROJECT_ROOT)
+
+    # Resolve paths (prioritize CLI args, fall back to settings.yaml config)
+    raw_data_path = Path(args.candidates) if args.candidates else PROJECT_ROOT / settings.settings.paths.raw_data
+    output_path = Path(args.out) if args.out else PROJECT_ROOT / settings.settings.paths.output
 
     # Load JD text (concatenate role title and required skills)
     jd_text = f"{settings.jd.role.title} " + " ".join(settings.jd.required_skills)
@@ -117,7 +130,7 @@ def main():
     # Retrieve candidate objects for top 100 to generate reasoning
     with StageTimer("Load Candidate objects for top 100 reasoning"):
         top_100_ids = {entry["candidate_id"] for entry in ranked}
-        loader = CandidateLoader(str(PROJECT_ROOT / settings.settings.paths.raw_data))
+        loader = CandidateLoader(str(raw_data_path))
         candidate_lookup = {}
         for candidate in loader.stream():
             if candidate.candidate_id in top_100_ids:
@@ -133,7 +146,6 @@ def main():
         )
 
     # Write submission CSV
-    output_path = PROJECT_ROOT / settings.settings.paths.output
     formatter = SubmissionFormatter()
     with StageTimer("Write CSV output"):
         formatter.write_csv(ranked, str(output_path))
