@@ -36,8 +36,12 @@ class ReasoningGenerator:
         profile = candidate.profile
         skills = candidate.skills
 
-        # Pick opener variant using candidate_id hash for deterministic variation
-        opener_idx = hash(candidate.candidate_id) % len(self.OPENERS)
+        # Pick opener variant using candidate_id number for deterministic variation
+        try:
+            cand_num = int(candidate.candidate_id.split('_')[1])
+        except (IndexError, ValueError):
+            cand_num = 0
+        opener_idx = cand_num % len(self.OPENERS)
         opener = self.OPENERS[opener_idx].format(
             title=profile.current_title,
             exp=profile.years_of_experience,

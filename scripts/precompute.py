@@ -52,14 +52,22 @@ def build_candidate_text(candidate) -> str:
     return " ".join(parts)
 
 
+import argparse
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="RecruitIQ Precomputer")
+    parser.add_argument("--candidates", type=str, help="Path to candidates.jsonl file")
+    return parser.parse_known_args()
+
 def main():
     logger.info("=" * 60)
     logger.info("RecruitIQ Precompute — Phase 1")
     logger.info("=" * 60)
 
+    args, unknown = parse_args()
     # Load config
     settings = Settings.load_defaults(PROJECT_ROOT)
-    raw_path = PROJECT_ROOT / settings.settings.paths.raw_data
+    raw_path = Path(args.candidates) if args.candidates else PROJECT_ROOT / settings.settings.paths.raw_data
     features_path = PROJECT_ROOT / settings.settings.paths.features
     honeypot_path = PROJECT_ROOT / settings.settings.paths.honeypot_flags
     index_path = PROJECT_ROOT / settings.settings.paths.index
